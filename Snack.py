@@ -1,7 +1,6 @@
-      import pygame
+import pygame
 import sys
 import random
-
 
 # 初始化pygame
 pygame.init()
@@ -16,21 +15,30 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 green = (0, 255, 0)
 red = (255, 0, 0)
+blue = (0, 0, 255)
 
 # 创建游戏窗口
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption('贪吃蛇游戏')
 
+# 设置字体
+font = pygame.font.SysFont(None, 36)
+
 # 定义贪吃蛇和食物
 snake = [(200, 200)]
 snake_direction = 'RIGHT'
-food = (random.randint(0, window_width//cell_size-1)*cell_size, 
-        random.randint(0, window_height//cell_size-1)*cell_size)
+food = (random.randint(0, window_width // cell_size - 1) * cell_size,
+        random.randint(0, window_height // cell_size - 1) * cell_size)
 
 clock = pygame.time.Clock()
 
 # 创建得分变量
 score = 0
+
+# 定义绘制得分的函数
+def draw_score(score):
+    score_text = font.render(f'Score: {score}', True, white)
+    window.blit(score_text, [10, 10])
 
 # 游戏主循环
 while True:
@@ -61,16 +69,30 @@ while True:
     elif snake_direction == 'RIGHT':
         new_head = (x + cell_size, y)
 
-    snake.pop() 
+    # 检查是否撞墙
+    if new_head[0] >= window_width or new_head[1] >= window_height or new_head[0] < 0 or new_head[1] < 0:
+        window.fill(blue)  # 改变背景颜色为蓝色
+        pygame.display.update()  # 更新窗口以显示蓝色背景
+        pygame.time.wait(2000)  # 等待2秒钟，让玩家看到游戏结束的效果
+        pygame.quit()
+        sys.exit()
+
+    # 检查是否撞到自己
+    if new_head in snake[1:]:
+        window.fill(blue)  # 改变背景颜色为蓝色
+        pygame.display.update()  # 更新窗口以显示蓝色背景
+        pygame.time.wait(2000)  # 等待2秒钟，让玩家看到游戏结束的效果
+        pygame.quit()
+        sys.exit()
 
     # 检查是否吃到食物
     if new_head == food:
-        food = (random.randint(0, window_width//cell_size-1)*cell_size, 
-                random.randint(0, window_height//cell_size-1)*cell_size)
+        food = (random.randint(0, window_width // cell_size - 1) * cell_size,
+                random.randint(0, window_height // cell_size - 1) * cell_size)
         score += 10  # 增加得分
     else:
-        pass
-        
+        snake.pop()  # 只有在没有吃到食物时才移除尾部
+
     snake.insert(0, new_head)  # 将新的头部添加到贪吃蛇
 
     # 渲染背景
@@ -83,7 +105,11 @@ while True:
     # 绘制食物
     pygame.draw.rect(window, red, (food[0], food[1], cell_size, cell_size))
 
+    # 绘制得分
+    draw_score(score)
+
     # 更新窗口
     pygame.display.update()
 
-    clock.tick(10)  # 控制帧率
+    clock.tick(10+score/10)  # 控制帧率
+
