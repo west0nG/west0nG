@@ -33,7 +33,7 @@ food = (random.randint(0, window_width // cell_size - 1) * cell_size,
 clock = pygame.time.Clock()
 
 # 创建得分变量
-score = 0
+score = 10
 
 # 定义绘制得分的函数
 def draw_score(score):
