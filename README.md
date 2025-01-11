@@ -1,3 +1,1 @@
-West0nG
-06 China/HK
-Web3 Explorer
+west0n 06
