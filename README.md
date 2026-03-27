@@ -1,7 +1,8 @@
 # Hi I am Weston Guo
 - Freshman at USC Iovine and Young Academy
-- Studying Web development, UIUX Design and Agentic Application
+- I build and ship cool stuff
 
+- Co-Founder Solvo
 - Co-Founder ModCraft
 - Prev. Founder PivotHack
 - Prev. Founding Member Punky Lab
