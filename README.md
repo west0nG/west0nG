@@ -2,10 +2,10 @@
 - Freshman at USC Iovine and Young Academy
 - I build and ship cool stuff
 
-- Co-Founder Solvo
-- Co-Founder ModCraft
-- Prev. Founder PivotHack
-- Prev. Founding Member Punky Lab
+- Founder of Foundagent
+- Co-Founder of ModCraft
+- Prev. Founder of PivotHack
+- Prev. Founding Member of Punky Lab
 
 ## Visit My Site and Know More About Me:
 west0n.top
